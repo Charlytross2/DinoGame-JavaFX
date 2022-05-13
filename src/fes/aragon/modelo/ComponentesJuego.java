@@ -8,10 +8,21 @@ public abstract class ComponentesJuego {
 	protected int y;
 	protected String imagen;
 	protected int velocidad;
-	
-	public ComponentesJuego(int x, int y, String imagen,int velocidad) {
+
+	public ComponentesJuego(int x, int y, String imagen, int velocidad) {
 		this.x = x;
 		this.y = y;
+		this.imagen = imagen;
+		this.velocidad = velocidad;
+	}
+
+	public ComponentesJuego(int y, String imagen, int velocidad) {
+		this.y = y;
+		this.imagen = imagen;
+		this.velocidad = velocidad;
+	}
+
+	public ComponentesJuego(String imagen, int velocidad) {
 		this.imagen = imagen;
 		this.velocidad = velocidad;
 	}
@@ -39,17 +50,22 @@ public abstract class ComponentesJuego {
 	public void setImagen(String imagen) {
 		this.imagen = imagen;
 	}
-	
+
 	public void setVelocidad(int velocidad) {
 		this.velocidad = velocidad;
 	}
-	
+
 	public int getVelocidad() {
 		return velocidad;
 	}
-	
+
 	public abstract void pintar(GraphicsContext graficos);
-	public abstract void teclado(KeyEvent evento,boolean presiona);
+
+	public abstract void teclado(KeyEvent evento, boolean presiona);
+
 	public abstract void raton(KeyEvent evento);
+
 	public abstract void logicaCalculos();
+	
+	public abstract void pararTodo();
 }

@@ -21,7 +21,7 @@ public class CargaTileMap {
 		int altoVentana = 150;
 
 		for (int fila = 0; fila < limiteY; fila++) {
-			for (int columna = 0; columna <= limiteX; columna++) {
+			for (int columna = 0; columna < limiteX; columna++) {
 				celda++;
 				CuadroTileMap c = new CuadroTileMap(cordXDentroImagen, cordYDentroImagen, anchoDentroImagen,
 						altoDentroImagen, anchoVentana, altoVentana);

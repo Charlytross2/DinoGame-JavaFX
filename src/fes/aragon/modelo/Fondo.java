@@ -46,4 +46,10 @@ public class Fondo extends ComponentesJuego{
 		}
 	}
 
+	@Override
+	public void pararTodo() {
+		// TODO Auto-generated method stub
+		
+	}
+
 }
