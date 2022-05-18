@@ -13,6 +13,7 @@ public class Nube extends ComponentesJuego{
 	private int x;
 	private int y;
 	private Rectangle rectangulo;
+	@SuppressWarnings("unused")
 	private boolean colision = false;
 	
 	public Nube(String imagen, int velocidad) {

@@ -6,6 +6,8 @@ import fes.aragon.extras.EfectosMusica;
 import fes.aragon.extras.MusicaCiclica;
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Group;
@@ -21,7 +23,7 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
-public class Juego extends Application {
+public class Juego extends Application{
 	private GraphicsContext graficos;
 	private Group root;// Nodo raiz
 	private Scene escena;// Escena de nuestra App en javaFX
@@ -35,6 +37,7 @@ public class Juego extends Application {
 	private int numeroNubes = (int) Math.ceil(Math.random() * (1 - 5) + 5);
 	private Nube[] nubes = new Nube[numeroNubes];
 	private boolean ventana = true;
+	private StringProperty valor = new SimpleStringProperty("Tiempo: 0");
 
 	@Override
 	public void start(Stage ventana) throws Exception {
@@ -64,10 +67,11 @@ public class Juego extends Application {
 			String ruta1 = "/fes/aragon/recursos/cactus1.png", ruta2 = "/fes/aragon/recursos/cactus2.png";
 			if (i == 0) {
 				y = 615;
-				cactus[i] = new Cactus(y, ruta1, 2);
-			} else {
+				cactus[i] = new Cactus(y, ruta1, 3);
+			} 
+			else {
 				y = 645;
-				cactus[i] = new Cactus(y, ruta2, 2);
+				cactus[i] = new Cactus(y, ruta2, 3);
 			}
 		}
 		for (int i = 0; i < nubes.length; i++) {
@@ -82,11 +86,6 @@ public class Juego extends Application {
 	}
 
 	private void pintar() {
-		Text tiempo = new Text(1000, 50, "Tiempo:" + (int)Math.ceil(dinosaurio.getTiempo()));
-		tiempo.setStyle("-fx-font-weight: bold");
-		tiempo.setFont(Font.font("Victor Mono", 25.0));
-		tiempo.setFill(Color.rgb(164, 164, 164));
-		root.getChildren().add(tiempo);
 		this.fondo.pintar(graficos);
 		this.dinosaurio.pintar(graficos);
 		for (Cactus cactu : cactus) {
@@ -95,6 +94,7 @@ public class Juego extends Application {
 		for (Nube nube : nubes) {
 			nube.pintar(graficos);
 		}
+		this.texto();
 	}
 
 	@SuppressWarnings("deprecation")
@@ -125,6 +125,7 @@ public class Juego extends Application {
 			public void handle(long tiempoActual) {
 				double t = (tiempoActual - tiempoInicio) / 1000000000.0;
 				dinosaurio.setTiempo(t);
+				valor.set("Tiempo:" + String.valueOf((int)dinosaurio.getTiempo()));
 				calculosLogica();
 				pintar();
 			}
@@ -166,5 +167,16 @@ public class Juego extends Application {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+	}
+	
+	private void texto() {
+		Text tiempo = new Text();
+		tiempo.setX(1000);
+		tiempo.setY(50);
+		tiempo.setStyle("-fx-font-weight: bold");
+		tiempo.setFont(Font.font("Victor Mono", 25.0));
+		tiempo.setFill(Color.rgb(164, 164, 164));
+		root.getChildren().add(tiempo);
+		tiempo.textProperty().bind(valor);
 	}
 }
