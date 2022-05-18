@@ -174,8 +174,8 @@ public class Juego extends Application{
 		tiempo.setX(1000);
 		tiempo.setY(50);
 		tiempo.setStyle("-fx-font-weight: bold");
-		tiempo.setFont(Font.font("Victor Mono", 25.0));
-		tiempo.setFill(Color.rgb(164, 164, 164));
+		tiempo.setFont(Font.font("Victor Mono", 30.0));
+		tiempo.setFill(Color.rgb(0, 0, 0));
 		root.getChildren().add(tiempo);
 		tiempo.textProperty().bind(valor);
 	}
