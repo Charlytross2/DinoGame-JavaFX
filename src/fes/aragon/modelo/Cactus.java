@@ -24,7 +24,6 @@ public class Cactus extends ComponentesJuego {
 	@Override
 	public void pintar(GraphicsContext graficos) {
 		graficos.drawImage(imagen, x, y);
-		graficos.strokeRect(rectangulo.getX(), rectangulo.getY(), rectangulo.getWidth(), rectangulo.getHeight());
 	}
 
 	@Override
@@ -39,7 +38,7 @@ public class Cactus extends ComponentesJuego {
 
 	@Override
 	public void logicaCalculos() {
-		if (x + imagen.getWidth() == 0) {
+		if (x + imagen.getWidth() < 0) {
 			x = numeroAleatorio();
 		}
 		if(colision == false) {

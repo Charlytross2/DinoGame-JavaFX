@@ -40,7 +40,6 @@ public class PersonajeAnimacion extends ComponentesJuego {
 		graficos.drawImage(imagen, cuadro.getCoorXImagenDentro(), cuadro.getCoorYImagenDentro(),
 				cuadro.getAnchoImagenDentro(), cuadro.getAltoImagenDentro(), x, y, cuadro.getAnchoVentanaPintar(),
 				cuadro.getAltoImagenDentro());
-		graficos.strokeRect(rectangulo.getX(), rectangulo.getY(), rectangulo.getWidth(), rectangulo.getHeight());
 	}
 
 	@Override

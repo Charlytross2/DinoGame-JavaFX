@@ -22,6 +22,7 @@ import javafx.scene.text.Text;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import javafx.stage.WindowEvent;
 
 public class Juego extends Application{
 	private GraphicsContext graficos;
@@ -31,7 +32,8 @@ public class Juego extends Application{
 	private Fondo fondo;
 	private Thread hiloCancion;
 	private PersonajeAnimacion dinosaurio;
-	private Cactus cactus[] = new Cactus[2];
+//	private Cactus cactus[] = new Cactus[2];
+	private Cactus cactus;
 	@SuppressWarnings("unused")
 	private CargaTileMap carga = null;
 	private int numeroNubes = (int) Math.ceil(Math.random() * (1 - 5) + 5);
@@ -48,6 +50,17 @@ public class Juego extends Application{
 		ventana.setScene(escena);// le asignamos al escenario una escena
 		ventana.setTitle("VideoJuego");
 		ventana.show();// mostramos el escenario
+		//detiene la ejecucion por completo al oprimir el boton de salida 
+		ventana.setOnCloseRequest(new EventHandler<WindowEvent>() {
+		    @Override
+		    public void handle(WindowEvent event) {
+		        try {
+					stop();
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+		    }
+		});
 	}
 
 	private void iniciarComponentes() {
@@ -62,18 +75,19 @@ public class Juego extends Application{
 		fondo = new Fondo(0, 0, "/fes/aragon/recursos/fondo1.jpeg", 5);
 		dinosaurio = new PersonajeAnimacion(10, 565, "/fes/aragon/recursos/dino.png", 3);
 		carga = new CargaTileMap();
-		for (int i = 0; i < cactus.length; i++) {
-			int y;
-			String ruta1 = "/fes/aragon/recursos/cactus1.png", ruta2 = "/fes/aragon/recursos/cactus2.png";
-			if (i == 0) {
-				y = 615;
-				cactus[i] = new Cactus(y, ruta1, 3);
-			} 
-			else {
-				y = 645;
-				cactus[i] = new Cactus(y, ruta2, 3);
-			}
-		}
+//		for (int i = 0; i < cactus.length; i++) {
+//			int y;
+//			String ruta1 = "/fes/aragon/recursos/cactus1.png", ruta2 = "/fes/aragon/recursos/cactus2.png";
+//			if (i == 0) {
+//				y = 620;
+//				cactus[i] = new Cactus(y, ruta1, 3);
+//			} 
+//			else {
+//				y = 645;
+//				cactus[i] = new Cactus(y, ruta2, 3);
+//			}
+//		}
+		cactus = new Cactus(645, "/fes/aragon/recursos/cactus2.png", 4	);
 		for (int i = 0; i < nubes.length; i++) {
 			nubes[i] = new Nube("/fes/aragon/recursos/nube.png", 1);
 		}
@@ -88,9 +102,10 @@ public class Juego extends Application{
 	private void pintar() {
 		this.fondo.pintar(graficos);
 		this.dinosaurio.pintar(graficos);
-		for (Cactus cactu : cactus) {
-			cactu.pintar(graficos);
-		}
+//		for (Cactus cactu : cactus) {
+//			cactu.pintar(graficos);
+//		}
+		cactus.pintar(graficos);
 		for (Nube nube : nubes) {
 			nube.pintar(graficos);
 		}
@@ -101,11 +116,14 @@ public class Juego extends Application{
 	private void calculosLogica() {
 		this.fondo.logicaCalculos();
 		this.dinosaurio.logicaCalculos();
-		for (Cactus cactu : cactus) {
-			cactu.logicaCalculos();
-			this.dinosaurio.detectarColision(cactu);
-			cactu.detectarColision(dinosaurio);
-		}
+//		for (Cactus cactu : cactus) {
+//			cactu.logicaCalculos();
+//			this.dinosaurio.detectarColision(cactu);
+//			cactu.detectarColision(dinosaurio);
+//		}
+		this.dinosaurio.detectarColision(cactus);
+		this.cactus.logicaCalculos();
+		this.cactus.detectarColision(dinosaurio);
 		for (Nube nube : nubes) {
 			nube.logicaCalculos();
 		}
@@ -144,9 +162,10 @@ public class Juego extends Application{
 	}
 
 	private void pararTodo() {
-		for (Cactus cactu : cactus) {
-			cactu.pararTodo();
-		}
+//		for (Cactus cactu : cactus) {
+//			cactu.pararTodo();
+//		}
+		cactus.pararTodo();
 	}
 
 	private void nuevaVentana() {

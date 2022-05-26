@@ -68,11 +68,13 @@ public class Nube extends ComponentesJuego{
 	public void detectarColision(Nube nube) {
 		if (this.getRectangulo().getBoundsInLocal().intersects(nube.getRectangulo().getBoundsInLocal())) {
 			this.colision = true;
+			pararTodo();
 		}
 	}
 	
 	@Override
 	public void pararTodo() {
+		this.x = x;
 	}
 	
 }
