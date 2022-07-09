@@ -6,7 +6,7 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.shape.Rectangle;
 
 public class PersonajeAnimacion extends ComponentesJuego {
-	private int gravedad = 3;
+	private int gravedad = 5;
 	private boolean desciende = false;
 	private boolean salto = false;
 	private Image imagen;

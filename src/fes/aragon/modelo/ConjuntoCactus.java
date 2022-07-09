@@ -3,55 +3,59 @@ package fes.aragon.modelo;
 import java.util.ArrayList;
 
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.image.Image;
 import javafx.scene.input.KeyEvent;
 
-public class ConjuntoCactus extends ComponentesJuego{
-	
-	public String tipoCactus[] = {"cactus1","cactus2"};
-	
+public class ConjuntoCactus extends ComponentesJuego {
+
+	private String tipoCactus[] = { "cactus1", "cactus2" };
+	private int coorY[] = { 620, 645 };
+
 	public ArrayList<Cactus> cactus = new ArrayList<>();
+	private int numeroActual = (int) (Math.random() * 2);
+	Image imagen;
 
 	public ConjuntoCactus(int x, int y, String imagen, int velocidad) {
+		// inicializamos en el arrayList a los cactus
 		super(x, y, imagen, velocidad);
-		int dibujoCactus = 0;
-		String tiposCactus;
-		for(int i = 0 ; i < tipoCactus.length ; i++) {
-			dibujoCactus = (int) (Math.random() * 2);
-			tiposCactus = tipoCactus[dibujoCactus];
-			int posX = (int) Math.random() * (1350-1200) + 1350;
-			Cactus cactu = new Cactus(posX, "/fes/aragon/recursos" + tiposCactus + ".png", 3);
+		for (int i = 0; i < tipoCactus.length; i++) {
+			String ruta = "/fes/aragon/recursos/" + tipoCactus[i] + ".png";
+			Cactus cactu = new Cactus(coorY[i], ruta, 5);
 			cactus.add(cactu);
 		}
 	}
 
 	@Override
 	public void pintar(GraphicsContext graficos) {
-		// TODO Auto-generated method stub
-		
+		this.cactus.get(numeroActual).pintar(graficos);
 	}
 
 	@Override
 	public void teclado(KeyEvent evento, boolean presiona) {
-		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void raton(KeyEvent evento) {
-		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void logicaCalculos() {
-		// TODO Auto-generated method stub
-		
+		imagen = new Image(this.cactus.get(numeroActual).getImagen());
+		if (this.cactus.get(numeroActual).getX() + imagen.getWidth() < 0) {
+			numeroActual = (int) (Math.random() * 2);
+		}
+		getActualCactus().logicaCalculos();
 	}
 
 	@Override
 	public void pararTodo() {
-		// TODO Auto-generated method stub
-		
+
+	}
+
+	public Cactus getActualCactus() {
+		return cactus.get(numeroActual);
 	}
 
 }

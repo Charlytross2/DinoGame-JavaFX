@@ -27,7 +27,6 @@ public class Nube extends ComponentesJuego{
 	@Override
 	public void pintar(GraphicsContext graficos) {
 		graficos.drawImage(imagen, x, y);
-		graficos.strokeRect(rectangulo.getX(), rectangulo.getY(), rectangulo.getWidth(), rectangulo.getHeight());
 	}
 
 	@Override

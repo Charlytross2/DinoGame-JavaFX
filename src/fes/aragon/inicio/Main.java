@@ -18,7 +18,7 @@ public class Main extends Application {
 			ventana.setScene(escena);// le asignamos al escenario una escena
 			ventana.setTitle("DinoGame");
 			ventana.show();// mostramos el escenario
-		} catch (Exception e) {
+		} catch (Exception e ) {
 			e.printStackTrace();
 		}
 	}	

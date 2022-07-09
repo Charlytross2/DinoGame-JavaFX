@@ -10,7 +10,6 @@ import javafx.scene.shape.Rectangle;
 public class Cactus extends ComponentesJuego {
 
 	private Rectangle rectangulo;
-	private int x;
 	private Image imagen;
 	private boolean colision = false;
 
